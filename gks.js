@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const bodyparser = require("body-parser");
 const request = require("request");
@@ -18,7 +19,8 @@ app.get("/",function(req,res)
 app.post("/",function(req,res)
 {
     var a = req.body.userinput;
-    request("https://api.openweathermap.org/data/2.5/weather?q="+a+"&appid=063c563b7d006988f7592acf1fb82a43&units=metric",function(error,response,body)
+    const key = process.env.API_KEY;
+    request("https://api.openweathermap.org/data/2.5/weather?q="+a+"&appid="+key+"&units=metric",function(error,response,body)
     {
        var data = JSON.parse(body);
        var b = data.main.temp;
